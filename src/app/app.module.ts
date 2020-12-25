@@ -5,9 +5,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { GameService } from '../services/GameService';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
-const config: SocketIoConfig = { url: 'ws://localhost:4200', options: {} };
 
 @NgModule({
   declarations: [
@@ -16,7 +13,6 @@ const config: SocketIoConfig = { url: 'ws://localhost:4200', options: {} };
   imports: [
     BrowserModule,
     HttpClientModule,
-    SocketIoModule.forRoot(config),
     FormsModule
   ],
   providers: [GameService],

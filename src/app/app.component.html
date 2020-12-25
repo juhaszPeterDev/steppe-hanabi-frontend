@@ -1,6 +1,6 @@
 {{lobby}}
 <div *ngFor="let message of messageList">
-
+{{message}}
 </div>
 
 <input [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" />

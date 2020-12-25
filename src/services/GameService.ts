@@ -1,30 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Socket } from 'ngx-socket-io';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import * as io from 'socket.io-client';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  asd: WebSocket;
+  socketInstance;
+  subject = new Subject<string>();
 
-  constructor(private http: HttpClient, private socket: Socket) { }
+  constructor(private http: HttpClient) {
+    this.socketInstance = io.io('http://localhost:3000');
+    this.socketInstance.on('new-message', (message) => {
+      this.subject.next(message);
+    });
+  }
 
   getLobby(){
     return this.http.get('/api/game/state');
   }
 
   public sendMessage(message) {
-    this.socket.emit('new-message', message);
+    this.socketInstance.emit('new-message', message);
   }
 
   public getMessages = () => {
-    return new Observable((observer) => {
-      this.socket.on('new-message', (message) => {
-          observer.next(message);
-      });
-    });
+    return this.subject.asObservable();
   }
  
 }

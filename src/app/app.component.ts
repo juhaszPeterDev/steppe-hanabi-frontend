@@ -18,7 +18,7 @@ export class AppComponent {
   }
 
   sendMessage() {
-    this.gameService.sendMessage(this.gameService);
+    this.gameService.sendMessage(this.newMessage);
     this.newMessage = '';
   }
 
