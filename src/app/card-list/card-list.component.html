@@ -1,0 +1,20 @@
+<div *ngIf="playerName" class="playerName">{{playerName}}</div>
+<div *ngIf="cards" [class]="getCardListMainClass()">
+    <div *ngFor="let card of cards; let ind = index" style="display: inline-block;">
+        <div class="card" (click)="selectCardByIndex(ind)">
+            <div *ngIf="cardInfos[ind].numberValue !== undefined" class="hintNumber">{{cardInfos[ind].numberValue}}</div>
+            <div *ngIf="cardInfos[ind].colorValue !== undefined" [class]="'hintColor '+card.colorValue+'Card'"></div>
+            <div [class]="getCardClass(card, ind)"><span style="margin: auto;">
+                {{card.numberValue}}
+            </span></div>
+        </div>
+    </div>
+</div>
+<div *ngIf="selectedCardIndex !== undefined">
+    <button (click)="playCard()">Play</button>
+    <button (click)="discardCard()">Discard</button>
+</div>
+<div *ngIf="selectedHintCard !== undefined">
+    <button (click)="hint(selectedHintCard.numberValue)">Hint {{selectedHintCard.numberValue}}</button>
+    <button (click)="hint(selectedHintCard.colorValue)">Hint {{selectedHintCard.colorValue}}</button>
+</div>

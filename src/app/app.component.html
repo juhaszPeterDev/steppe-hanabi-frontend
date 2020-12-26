@@ -1,7 +1,6 @@
-{{lobby}}
-<div *ngFor="let message of messageList">
-{{message}}
+<app-landing *ngIf="!hasGameStarted() && !hasGameEnded()" [lobbyData]="lobby" (emitUserName)="setUser($event)"></app-landing>
+<app-match-view *ngIf="hasGameStarted() && !hasGameEnded()" [lobby]="lobby" [userName]="joinedUser"></app-match-view>
+<div *ngIf="hasGameEnded()">
+    Game over
+    <button (click)="restart()">Restart</button>
 </div>
-
-<input [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" />
-<button (click)="sendMessage()">Send Message</button>

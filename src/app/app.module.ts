@@ -5,10 +5,16 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { GameService } from '../services/GameService';
+import { LandingComponent } from './landing/landing.component';
+import { MatchViewComponent } from './match-view/match-view.component';
+import { CardListComponent } from './card-list/card-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LandingComponent,
+    MatchViewComponent,
+    CardListComponent
   ],
   imports: [
     BrowserModule,

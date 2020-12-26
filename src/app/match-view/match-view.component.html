@@ -1,0 +1,25 @@
+<div *ngIf="lobby">
+    <div>
+        <span>Cards left: {{lobby.cardList.length}}, tokens: {{lobby.hints}}, mistakes: {{lobby.mistakes}}.</span>
+        <span *ngIf="canPlay()" style="font-weight: 800; color: red;">Your turn</span>
+    </div>
+    <div class="stack">
+        <div *ngFor="let card of cardPile" style="display: inline-block;">
+            <div class="card">
+                <div [class]="getCardClass(card)"><span style="margin: auto;">
+                    {{card.numberValue}}
+                </span></div>
+            </div>
+        </div>
+    </div>
+    <div *ngFor="let player of lobby.players; let ind = index">
+        <app-card-list
+            [playerName]="player.name"
+            [cards]="player.cards"
+            [cardInfos]="player.cardInfos"
+            [areCardsHidden]="player.name === userName"
+            [canPlay]="canPlay()"
+            [playerIndex]="ind"></app-card-list>
+    </div>
+</div>
+<button (click)="endGame()">End game</button>

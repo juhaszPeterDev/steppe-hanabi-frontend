@@ -1,0 +1,13 @@
+<div *ngIf="!joined">
+    Set username to join
+    <input [(ngModel)]="username">
+    <button (click)="sendJoinRequest()">Join</button>
+    <button (click)="clearLobby()">Clear lobby</button>
+</div>
+<button *ngIf="joined" (click)="start()">Start game</button>
+<div *ngIf="lobbyData">
+    <div>Joined players:</div>
+    <div *ngFor="let user of lobbyData.players">
+        {{user.name}}
+    </div>
+</div>

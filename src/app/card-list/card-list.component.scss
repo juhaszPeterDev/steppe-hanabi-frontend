@@ -1,0 +1,66 @@
+.whiteCard{
+    background-color: white;
+}
+
+.yellowCard {
+    background-color: yellow;
+}
+
+.redCard {
+    background-color: red;
+}
+
+.blueCard {
+    background-color: blue;
+}
+
+.greenCard {
+    background-color: green;
+}
+
+.hiddenCardInfo .trueCard {
+    background-color: grey;
+
+    span{
+        display: none;
+    }
+}
+
+.card{
+    position: relative;
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border: solid 1px black;
+    align-items: center;
+}
+
+.card>.trueCard{
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.hintNumber{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+}
+
+.hintColor{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+}
+
+.trueCard.selected{
+    border: 5px solid black;
+}

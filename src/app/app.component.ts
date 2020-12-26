@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ɵangular_packages_platform_browser_dynamic_platform_browser_dynamic_a } from '@angular/platform-browser-dynamic';
 import { GameService } from 'src/services/GameService';
 
 @Component({
@@ -7,26 +8,39 @@ import { GameService } from 'src/services/GameService';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  lobby = '';
-  newMessage = '';
-  messageList:  string[] = [];
+  lobby;
+  joinedUser;
 
   constructor(private gameService: GameService){
     this.gameService.getLobby().subscribe(result => {
-      this.lobby = JSON.stringify(result,null,2);
+      this.lobby = result;
     });
-  }
-
-  sendMessage() {
-    this.gameService.sendMessage(this.newMessage);
-    this.newMessage = '';
   }
 
   ngOnInit(){
     this.gameService
       .getMessages()
-      .subscribe((message: string) => {
-        this.messageList.push(message);
+      .subscribe((data: any) => {
+        this.lobby = data;
       });
+  }
+
+  setUser(name): void {
+    this.joinedUser = name;
+  }
+
+  hasGameStarted(): boolean {
+    if (this.lobby === undefined || this.lobby.players.length === 0 || this.lobby.players[0].cards.length === 0) { return false; }
+    return true;
+  }
+
+  hasGameEnded(): boolean {
+    const hasGameStarted = this.hasGameStarted();
+    const pilesAreComplete = Object.values(this.lobby.cardPiles).filter(i => i !== 5).length === 0;
+    return (hasGameStarted && (this.lobby.mistakes >= 3 || pilesAreComplete));
+  }
+
+  restart(): void {
+    this.gameService.clearLobby().subscribe();
   }
 }
