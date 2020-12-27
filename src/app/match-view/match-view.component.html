@@ -12,6 +12,16 @@
             </div>
         </div>
     </div>
+    <div class="stack" style="min-height: 80px;">
+        <span>Discarded:</span>
+        <div *ngFor="let card of lobby.discardedCardList" style="display: inline-block;">
+            <div class="card">
+                <div [class]="getCardClass(card)"><span style="margin: auto;">
+                    {{card.numberValue}}
+                </span></div>
+            </div>
+        </div>
+    </div>
     <div *ngFor="let player of lobby.players; let ind = index">
         <app-card-list
             [playerName]="player.name"
@@ -19,7 +29,8 @@
             [cardInfos]="player.cardInfos"
             [areCardsHidden]="player.name === userName"
             [canPlay]="canPlay()"
-            [playerIndex]="ind"></app-card-list>
+            [playerIndex]="ind"
+            [isActive]="ind === lobby.activePlayerIndex"></app-card-list>
     </div>
 </div>
 <button (click)="endGame()">End game</button>

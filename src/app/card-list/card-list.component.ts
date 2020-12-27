@@ -13,6 +13,7 @@ export class CardListComponent implements OnInit {
   @Input() areCardsHidden;
   @Input() canPlay;
   @Input() playerIndex;
+  @Input() isActive;
   selectedCardIndex?: any;
   selectedHintCard?: any;
 

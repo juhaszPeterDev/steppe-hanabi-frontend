@@ -1,4 +1,4 @@
-<div *ngIf="playerName" class="playerName">{{playerName}}</div>
+<div *ngIf="playerName" class="playerName">{{isActive?'>':''}}{{playerName}}</div>
 <div *ngIf="cards" [class]="getCardListMainClass()">
     <div *ngFor="let card of cards; let ind = index" style="display: inline-block;">
         <div class="card" (click)="selectCardByIndex(ind)">
