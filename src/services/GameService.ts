@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as io from 'socket.io-client';
 import { Observable, Subject } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,7 @@ export class GameService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) {
-    this.socketInstance = io.io('http://localhost:3000');
+    this.socketInstance = io.io('https://pure-badlands-21958.herokuapp.com/');
     this.socketInstance.on('new-message', (message) => {
       this.getLobby().subscribe(result => {
         this.subject.next(result);

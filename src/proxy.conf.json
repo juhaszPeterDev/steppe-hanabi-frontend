@@ -1,7 +1,8 @@
 {
-    "/api/*": {
-        "target": "http://localhost:3000",
+    "/api": {
+        "target": "https://pure-badlands-21958.herokuapp.com",
         "secure": false,
-        "logLevel": "debug"
+        "logLevel": "debug",
+        "changeOrigin": true
     }
 }
